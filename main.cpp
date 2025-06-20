@@ -8,31 +8,26 @@
 #include <iomanip>
 #include "Tree.h"
 
-// --- Declarações das Funções ---
-
 Tree build_tree_from_string(const std::string& s);
 int zhang_shasha_distance(Tree& tree1, Tree& tree2);
 void treedist_optimized(Tree& tree1, Tree& tree2, int i, int j, std::vector<std::vector<int>>& TD);
 int naive_distance(Tree& tree1, Tree& tree2);
 void treedist_naive(Tree& tree1, Tree& tree2, int i, int j, std::vector<std::vector<int>>& TD);
 
-// --- Implementação do Main (Framework de Testes) ---
-
 int main() {
     // Lista de pares de árvores para testar
     // Adicionados casos maiores para demonstrar a diferença de performance.
     std::vector<std::pair<std::string, std::string>> test_cases = {
-        // --- Casos Pequenos (para validação) ---
+        // Casos Pequenos (para validação)
         {"f(d(a,c(b)),e)", "f(c(d(a,b)),e)"},
         {"a(b(c,d),e(f,g(i)))", "a(b(c,d),e(f,g(h)))"},
         {"d", "g(h)"},
         {"a(b,c,d)", "a(c,d,b)"},
-        // --- Caso Médio (Profundo) ---
+        // Caso Médio (Profundo)
         {"a(b(c(d(e(f(g(h(i(j))))))))))", "a(b(c(d(e(f(g(h(i(k))))))))))"},
-        // --- Caso Médio (Largo) ---
+        // Caso Médio (Largo)
         {"a(b,c,d,e,f,g,h,i,j,k)", "a(c,b,e,d,g,f,i,h,k,j)"},
         
-        // --- NOVOS CASOS GRANDES ---
         // MELHOR CASO para Zhang-Shasha: Árvore "pente", alta e estreita.
         // Possui pouquíssimos keyroots, então a otimização é máxima.
         {"a(b(c(d(e(f(g(h(i(j(k(l(m(n(o(p(q(r(s(t))))))))))))))))))))", 
@@ -63,13 +58,13 @@ int main() {
             size_t size1 = tree1.nodelist.size();
             size_t size2 = tree2.nodelist.size();
             
-            // Define o número de repetições para o benchmark
-            int repetitions = (size1 < 25 && size2 < 25) ? 1000 : 100;
+            // Número de repetições para o benchmark
+            int repetitions = 1000;
 
             std::cout << "-----------------------------------------------------\n";
             std::cout << "Testando T1 de " << size1 << " nos e T2 de " << size2 << " nos (repetindo " << repetitions << " vezes)\n";
 
-            // --- Benchmark do Algoritmo de Zhang-Shasha ---
+            // Benchmark do Algoritmo de Zhang-Shasha
             int dist_zs = 0;
             auto start_zs = std::chrono::high_resolution_clock::now();
             for(int i = 0; i < repetitions; ++i) {
@@ -80,7 +75,7 @@ int main() {
             
             size_t space_zs = (size1 + 1) * (size2 + 1) * sizeof(int);
 
-            // --- Benchmark do Algoritmo Ingênuo ---
+            // Benchmark do Algoritmo Naive
             int dist_naive = 0;
             auto start_naive = std::chrono::high_resolution_clock::now();
             for(int i = 0; i < repetitions; ++i) {
@@ -91,9 +86,9 @@ int main() {
             
             size_t space_naive = (size1 + 1) * (size2 + 1) * sizeof(int);
             
-            std::cout << std::fixed << std::setprecision(6); // Formata a saída do tempo
+            std::cout << std::fixed << std::setprecision(6);
             std::cout << "[Zhang-Shasha] Distancia: " << dist_zs << ", Tempo Medio: " << time_zs_avg << " ms\n";
-            std::cout << "[Ingenuo]      Distancia: " << dist_naive << ", Tempo Medio: " << time_naive_avg << " ms\n";
+            std::cout << "[Naive]      Distancia: " << dist_naive << ", Tempo Medio: " << time_naive_avg << " ms\n";
 
             results_file << size1 << "," << size2 << "," << dist_zs << "," << time_zs_avg << ","
                          << space_zs << "," << dist_naive << "," << time_naive_avg << "," << space_naive << "\n";
@@ -109,7 +104,7 @@ int main() {
     return 0;
 }
 
-// --- Implementação dos Algoritmos ---
+// Implementação dos Algoritmos
 
 int zhang_shasha_distance(Tree& tree1, Tree& tree2) {
     tree1.build();

@@ -10,7 +10,7 @@ O projeto inclui e compara duas abordagens de programação dinâmica:
 
 1.  **Algoritmo de Zhang-Shasha (Otimizado):** A implementação fiel do algoritmo rápido proposto por Kaizhong Zhang e Dennis Shasha em seu artigo de 1989. A principal otimização vem do uso de "keyroots" para reduzir drasticamente o número de subproblemas de distância de subárvores que precisam ser calculados.
 
-2.  **Algoritmo Ingênuo (Baseline):** Uma versão do mesmo algoritmo de programação dinâmica, mas sem a otimização dos keyroots. Ele calcula a distância para todos os pares de subflorestas possíveis, servindo como uma linha de base para demonstrar o ganho de eficiência do algoritmo de Zhang-Shasha.
+2.  **Algoritmo Naive (Baseline):** Uma versão do mesmo algoritmo de programação dinâmica, mas sem a otimização dos keyroots. Ele calcula a distância para todos os pares de subflorestas possíveis, servindo como uma linha de base para demonstrar o ganho de eficiência do algoritmo de Zhang-Shasha.
 
 ## Estrutura dos Arquivos
 

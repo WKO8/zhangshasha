@@ -12,10 +12,10 @@ struct Edge {
 
 // Estrutura para representar um nó da árvore.
 struct Node {
-    std::vector<Edge> edgelist; // Lista de arestas (filhos) do nó
+    std::vector<Edge> edgelist;
     std::string nodename;
-    int index = -1;             // Índice pós-ordem (calculado)
-    int leftmost = -1;          // Índice do descendente folha mais à esquerda (calculado)
+    int index = -1;
+    int leftmost = -1;
 
     Node() = default;
     Node(const std::vector<Edge>& edges, std::string name) : edgelist(edges), nodename(name) {}
